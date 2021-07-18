@@ -32,15 +32,21 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         int i = 0;
+        boolean checkUuid = false;
 
-        while (i < size && storage[i].uuid != uuid) {
+        while (i < size) {
+            if (storage[i].uuid.equals(uuid)) {
+                checkUuid = true;
+            }
+
+            if (checkUuid) {
+                storage[i] = storage[i + 1];
+            }
             i++;
         }
-        for (int j = i; j < size - 1; j++) {
-            storage[j].uuid = storage[j + 1].uuid;
+        if (checkUuid) {
+            size--;
         }
-        storage[size - 1] = null;
-        size--;
     }
     /**
      * @return array, contains only Resumes in storage (without null)
