@@ -7,14 +7,14 @@ public class ArrayStorage {
     int size = 0;
 
     void clear() {
-        for (int i = 0; i < storage.length; i++) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
     }
 
     void save(Resume r) {
         if (get(r.uuid) == null) {
-            storage[size()] = r;
+            storage[size] = r;
             size++;
         } else {
             System.out.println(r.uuid + " -already exist, please another uuid");
@@ -52,11 +52,11 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] tempStorage = new Resume[size];
+        Resume[] allResume = new Resume[size];
         for (int i = 0; i < size; i++) {
-            tempStorage[i] = storage[i];
+            allResume[i] = storage[i];
         }
-        return tempStorage;
+        return allResume;
     }
 
     int size() {
