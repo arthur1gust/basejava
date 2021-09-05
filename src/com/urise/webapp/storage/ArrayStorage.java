@@ -1,3 +1,7 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 /**
  * Array based storage for Resumes
  *
@@ -13,17 +17,17 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (get(r.uuid) == null) {
+        if (get(r.getUuid()) == null) {
             storage[size()] = r;
             size++;
         } else {
-            System.out.println(r.uuid + " -already exist, please another uuid");
+            System.out.println(r.getUuid() + " -already exist, please another uuid");
         }
     }
 
     Resume get(String uuid) {
         for(int i = 0; i < size; i++) {
-            if(uuid.equals(storage[i].uuid)) {
+            if(uuid.equals(storage[i].getUuid())) {
                 return storage[i];
             }
         }
@@ -35,7 +39,7 @@ public class ArrayStorage {
         boolean checkUuid = false;
 
         while (i < size) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 checkUuid = true;
             }
 
