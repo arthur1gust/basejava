@@ -7,16 +7,16 @@ import com.urise.webapp.model.Resume;
  *
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int size = 0;
+    private Resume[] storage = new Resume[10000];
+    private int size = 0;
 
-    void clear() {
+    public void clear() {
         for (int i = 0; i < storage.length; i++) {
             storage[i] = null;
         }
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         if (get(r.getUuid()) == null) {
             storage[size()] = r;
             size++;
@@ -25,7 +25,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         for(int i = 0; i < size; i++) {
             if(uuid.equals(storage[i].getUuid())) {
                 return storage[i];
@@ -34,7 +34,7 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int i = 0;
         boolean checkUuid = false;
 
@@ -55,7 +55,7 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] tempStorage = new Resume[size];
         for (int i = 0; i < size; i++) {
             tempStorage[i] = storage[i];
@@ -63,7 +63,7 @@ public class ArrayStorage {
         return tempStorage;
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 }
