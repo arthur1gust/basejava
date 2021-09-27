@@ -25,6 +25,13 @@ public class ArrayStorage {
         }
     }
 
+    public void update(Resume r) {
+        if (get(r.getUuid()) != null) {
+            System.out.println(r.getUuid() + " - обновлено");
+            r.setUuid(r.getUuid());
+        }
+    }
+
     public Resume get(String uuid) {
         for(int i = 0; i < size; i++) {
             if(uuid.equals(storage[i].getUuid())) {
