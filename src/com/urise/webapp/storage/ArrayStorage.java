@@ -16,6 +16,13 @@ public class ArrayStorage {
         }
     }
 
+    public void update(Resume r) {
+        if (get(r.getUuid()) != null) {
+            System.out.println(r.getUuid() + " - резюме обновлено");
+            r.setUuid(r.getUuid());
+        }
+    }
+
     public void save(Resume r) {
         if (get(r.getUuid()) == null) {
             storage[size] = r;
@@ -67,3 +74,4 @@ public class ArrayStorage {
         return size;
     }
 }
+
