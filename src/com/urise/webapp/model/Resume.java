@@ -11,6 +11,10 @@ public class Resume {
     public String getUuid() {
         return uuid;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> d7be101baa6cf8944dcb7b76c32381ca48abb4f9
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }

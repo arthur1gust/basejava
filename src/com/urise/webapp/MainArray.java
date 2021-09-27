@@ -37,7 +37,11 @@ public class MainArray {
                     break;
                 case "save":
                     r = new Resume();
+<<<<<<< HEAD:src/com/urise/webapp/MainArray.java
                     r.setUuid("uuid");
+=======
+                    r.setUuid(uuid);
+>>>>>>> d7be101baa6cf8944dcb7b76c32381ca48abb4f9:src/MainArray.java
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;

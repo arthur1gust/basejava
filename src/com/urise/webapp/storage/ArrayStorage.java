@@ -11,21 +11,14 @@ public class ArrayStorage {
     private int size = 0;
 
     public void clear() {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < storage.length; i++) {
             storage[i] = null;
-        }
-    }
-
-    public void update(Resume r) {
-        if (get(r.getUuid()) != null) {
-            System.out.println(r.getUuid() + " - резюме обновлено");
-            r.setUuid(r.getUuid());
         }
     }
 
     public void save(Resume r) {
         if (get(r.getUuid()) == null) {
-            storage[size] = r;
+            storage[size()] = r;
             size++;
         } else {
             System.out.println(r.getUuid() + " -already exist, please another uuid");
@@ -63,15 +56,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        Resume[] allResume = new Resume[size];
+        Resume[] tempStorage = new Resume[size];
         for (int i = 0; i < size; i++) {
-            allResume[i] = storage[i];
+            tempStorage[i] = storage[i];
         }
-        return allResume;
+        return tempStorage;
     }
 
     public int size() {
         return size;
     }
 }
-

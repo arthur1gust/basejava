@@ -1,3 +1,8 @@
+<<<<<<< HEAD:src/MainTestArrayStorage.java
+=======
+package com.urise.webapp;
+
+>>>>>>> d7be101baa6cf8944dcb7b76c32381ca48abb4f9:src/com/urise/webapp/MainTestArrayStorage.java
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.ArrayStorage;
 
