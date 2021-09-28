@@ -17,10 +17,9 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (size >= 10_000) {
-            System.out.println("Превышено максимально возможное количество резюме - " + size + " - максимально допустимое количество 10000");
-        } else {
-            if (get(r.getUuid()) == null) {
+        if (size >= storage.length) {
+            System.out.println("Превышено максимально возможное количество резюме - " + size);
+        } else {if (get(r.getUuid()) == null) {
                 storage[size()] = r;
                 size++;
             } else {
@@ -84,5 +83,16 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    private int searchResume(String uuid) {
+        int search = 0;
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
+                search = i;
+                break;
+            }
+        }
+        return search;
     }
 }
