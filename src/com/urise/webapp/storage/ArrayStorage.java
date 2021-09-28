@@ -7,7 +7,7 @@ import com.urise.webapp.model.Resume;
  *
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     private int size = 0;
 
     public void clear() {
@@ -17,28 +17,39 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (get(r.getUuid()) == null) {
-            storage[size()] = r;
-            size++;
+        if (size >= 10000) {
+            System.out.println("Превышено максимально возможное количество резюме - " + size + " - максимально допустимое количество 10000");
         } else {
-            System.out.println(r.getUuid() + " -already exist, please another uuid");
+            if (get(r.getUuid()) == null) {
+                storage[size()] = r;
+                size++;
+            } else {
+                System.out.println(r.getUuid() + " - данный uuid уже существует, пожалуйста, введите новый");
+            }
         }
     }
 
     public void update(Resume r) {
         if (get(r.getUuid()) != null) {
-            System.out.println(r.getUuid() + " - обновлено");
+            System.out.println(r.getUuid() + " - резюме обновлено");
             r.setUuid(r.getUuid());
         }
     }
 
     public Resume get(String uuid) {
+        Resume checkResume = null;
         for(int i = 0; i < size; i++) {
-            if(uuid.equals(storage[i].getUuid())) {
-                return storage[i];
+            if(storage[i].getUuid().equals(uuid)) {
+                checkResume = storage[i];
+                break;
             }
         }
-        return null;
+        if (checkResume != null) {
+            System.out.println("Ваше резюме - " + uuid);
+        } else {
+            System.out.println(uuid + " - резюме не найдено, введите другой uuid");
+        }
+        return checkResume;
     }
 
     public void delete(String uuid) {
@@ -57,17 +68,18 @@ public class ArrayStorage {
         }
         if (checkUuid) {
             size--;
+            System.out.println(uuid + " - данное резюме удалено");
         }
     }
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        Resume[] tempStorage = new Resume[size];
+        Resume[] allResume = new Resume[size];
         for (int i = 0; i < size; i++) {
-            tempStorage[i] = storage[i];
+            allResume[i] = storage[i];
         }
-        return tempStorage;
+        return allResume;
     }
 
     public int size() {
