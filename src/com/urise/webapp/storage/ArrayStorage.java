@@ -17,7 +17,7 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (size >= 10000) {
+        if (size >= 10_000) {
             System.out.println("Превышено максимально возможное количество резюме - " + size + " - максимально допустимое количество 10000");
         } else {
             if (get(r.getUuid()) == null) {
