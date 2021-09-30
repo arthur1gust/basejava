@@ -44,22 +44,12 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int i = 0;
-        boolean checkUuid = false;
-
-        while (i < size) {
-            if (storage[i].getUuid().equals(uuid)) {
-                checkUuid = true;
-            }
-
-            if (checkUuid) {
-                storage[i] = storage[i + 1];
-            }
-            i++;
-        }
-        if (checkUuid) {
+        if (searchResume(uuid) == 0) {
+            System.out.println(uuid + " - резюме не найдено");
+        } else {
+            storage[searchResume(uuid)] = storage[size - 1];
+            storage[size - 1] = null;
             size--;
-            System.out.println(uuid + " - данное резюме удалено");
         }
     }
     /**
