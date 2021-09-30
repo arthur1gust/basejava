@@ -36,19 +36,11 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        Resume checkResume = null;
-        for(int i = 0; i < size; i++) {
-            if(storage[i].getUuid().equals(uuid)) {
-                checkResume = storage[i];
-                break;
-            }
+        if (searchResume(uuid) == 0) {
+            System.out.println(uuid + " - резюме не найдено");
+            return null;
         }
-        if (checkResume != null) {
-            System.out.println("Ваше резюме - " + uuid);
-        } else {
-            System.out.println(uuid + " - резюме не найдено, введите другой uuid");
-        }
-        return checkResume;
+        return storage[searchResume(uuid)];
     }
 
     public void delete(String uuid) {
