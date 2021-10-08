@@ -7,8 +7,10 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private Resume[] storage = new Resume[10_000];
+public class ArrayStorage extends AbstractArrayStorage {
+    private static final int STORAGE_LIMIT = 10000;
+
+    private Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size = 0;
 
     public void clear() {
@@ -17,7 +19,7 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (size >= storage.length) {
+        if (size >= STORAGE_LIMIT) {
             System.out.println("Превышено максимально возможное количество резюме - " + size);
         } else if (findIndex(r.getUuid()) == -1) {
             storage[size] = r;
@@ -38,15 +40,6 @@ public class ArrayStorage {
         }
     }
 
-    public Resume get(String uuid) {
-        int getResume = findIndex(uuid);
-        if (getResume == -1) {
-            System.out.println(uuid + " - резюме не найдено");
-            return null;
-        }
-        return storage[findIndex(uuid)];
-    }
-
     public void delete(String uuid) {
         int deleteResume = findIndex(uuid);
         if (deleteResume == -1) {
@@ -63,16 +56,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        Resume[] allResume = new Resume[size];
-        System.arraycopy(storage, 0, allResume, 0, size);
-        return allResume;
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     public int size() {
         return size;
     }
 
-    private int findIndex(String uuid) {
+    protected int findIndex(String uuid) {
         int index = -1;
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
