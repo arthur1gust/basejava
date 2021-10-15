@@ -28,7 +28,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume r) {
         if (size >= STORAGE_LIMIT) {
             System.out.println("Превышено максимально возможное количество резюме - " + size);
-        } else if (findIndex(r.getUuid()) == -1) {
+        } else if (getIndex(r.getUuid()) == -1) {
             storage[size] = r;
             size++;
             System.out.println(r.getUuid() + " - резюме сохранено");
@@ -39,7 +39,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        int updateResume = findIndex(r.getUuid());
+        int updateResume = getIndex(r.getUuid());
         if (updateResume == -1) {
             System.out.println(r.getUuid() + " - резюме не найдено");
         } else {
@@ -50,7 +50,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public void delete(String uuid) {
-        int deleteResume = findIndex(uuid);
+        int deleteResume = getIndex(uuid);
         if (deleteResume == -1) {
             System.out.println(uuid + " - резюме не найдено");
         } else {
@@ -63,12 +63,12 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public Resume get(String uuid) {
-        int getResume = findIndex(uuid);
+        int getResume = getIndex(uuid);
         if (getResume == -1) {
             System.out.println(uuid + " - резюме не найдено");
             return null;
         }
-        return storage[findIndex(uuid)];
+        return storage[getIndex(uuid)];
     }
 
     @Override
@@ -76,5 +76,5 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    protected abstract int findIndex(String uuid);
+    protected abstract int getIndex(String uuid);
 }
