@@ -28,4 +28,8 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
         return index;
     }
+
+    protected void saveSorted(int fromIndex, Resume r) {
+        storage[size] = r;
+    }
 }
