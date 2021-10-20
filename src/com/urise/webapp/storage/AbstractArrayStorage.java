@@ -26,13 +26,13 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public void save(Resume r) {
-        int indexSave = getIndex(r.getUuid());
+        int indexForSave = getIndex(r.getUuid());
         if (size >= STORAGE_LIMIT) {
             System.out.println("Превышено максимально возможное количество резюме - " + size);
-        } else if (indexSave >= 0) {
+        } else if (indexForSave >= 0) {
             System.out.println("Resume " + r.getUuid() + " - данный uuid уже существует, пожалуйста, введите новый");
         } else {
-            saveSorted(indexSave, r);
+            saveResume(indexForSave, r);
             size++;
             System.out.println(r.getUuid() + " - резюме сохранено");
         }
@@ -40,24 +40,24 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        int updateResume = getIndex(r.getUuid());
-        if (updateResume < 0) {
+        int indexForUpdate = getIndex(r.getUuid());
+        if (indexForUpdate < 0) {
             System.out.println(r.getUuid() + " - резюме не найдено");
         } else {
-            storage[updateResume] = r;
+            storage[indexForUpdate] = r;
             System.out.println(r.getUuid() + " - резюме обновлено");
         }
     }
 
     @Override
     public void delete(String uuid) {
-        int deleteResume = getIndex(uuid);
-        if (deleteResume < 0) {
+        int indexForDelete = getIndex(uuid);
+        if (indexForDelete < 0) {
             System.out.println(uuid + " - резюме не найдено");
         } else {
-            storage[deleteResume] = null;
-            if (size - (deleteResume + 1) >= 0) {
-                System.arraycopy(storage, deleteResume + 1, storage, deleteResume, size - deleteResume - 1);
+            storage[indexForDelete] = null;
+            if (size - (indexForDelete + 1) >= 0) {
+                System.arraycopy(storage, indexForDelete + 1, storage, indexForDelete, size - indexForDelete - 1);
             }
             storage[size - 1] = null;
             size--;
@@ -67,20 +67,20 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     public Resume get(String uuid) {
-        int getResume = getIndex(uuid);
-        if (getResume < 0) {
+        int indexForGet = getIndex(uuid);
+        if (indexForGet < 0) {
             System.out.println(uuid + " - резюме не найдено");
             return null;
         }
-        return storage[getResume];
+        return storage[indexForGet];
     }
 
     @Override
     public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+        return Arrays.copyOf(storage, size);
     }
 
     protected abstract int getIndex(String uuid);
 
-    protected abstract void saveSorted(int fromIndex, Resume r);
+    protected abstract void saveResume(int fromIndex, Resume r);
 }

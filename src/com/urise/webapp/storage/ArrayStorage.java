@@ -10,9 +10,6 @@ import java.util.Arrays;
 public class ArrayStorage extends AbstractArrayStorage {
     private static final int STORAGE_LIMIT = 10000;
 
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size = 0;
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -29,7 +26,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         return index;
     }
 
-    protected void saveSorted(int fromIndex, Resume r) {
+    protected void saveResume(int fromIndex, Resume r) {
         storage[size] = r;
     }
 }
